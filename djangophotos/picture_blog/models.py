@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 # Create your models here.
-class picture_blog(models.Model):
+class PictureBlog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Publish date')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Photo', blank=False)
     is_published = models.BooleanField(default=True, verbose_name='Published')
@@ -15,7 +15,6 @@ class picture_blog(models.Model):
         return f'created_at = {self.created_at}'
 
     class Meta:
-        verbose_name='Picture Blog'
+        verbose_name = 'Picture Blog'
         verbose_name_plural = 'Pictures blog'
         ordering = ['-created_at']
-
