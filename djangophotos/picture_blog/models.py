@@ -9,7 +9,7 @@ class picture_blog(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Published')
 
     def get_absolute_url(self):
-        return reverse()
+        return reverse('view_pictures', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f'created_at = {self.created_at}'
