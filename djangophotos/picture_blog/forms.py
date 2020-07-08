@@ -26,9 +26,9 @@ class UserLoginForm(AuthenticationForm):
 #--------------------
 #TODO: Add Form for add picture
 
-# class NewsForm(forms.ModelForm):
-#     class Meta:
-#         model = PictureBlog
-#         fields = '__all__'
-#         widgets = {
-#         }
+class PictureForm(forms.ModelForm):
+    class Meta:
+        model = PictureBlog
+        fields = '__all__'
+        widgets = {
+        }

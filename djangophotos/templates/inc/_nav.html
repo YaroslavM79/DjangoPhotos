@@ -9,7 +9,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{%url 'home'%}">Main</a></li>
             {% if request.user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{%url 'add_news'%}">Add Picture</a></li>
+                <li class="nav-item"><a class="nav-link" href="{%url 'add_picture'%}">Add Picture</a></li>
             {% endif %}
         </ul>
 
