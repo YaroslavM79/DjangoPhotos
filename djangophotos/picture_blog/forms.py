@@ -19,16 +19,29 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(label='Username:', widget=forms.TextInput(attrs={"class": "form-control"}))
     password = forms.CharField(label='Password:', widget=forms.PasswordInput(attrs={"class": "form-control"}))
 
-#--------------------
-#TODO: Add Form for add picture
 
-class PictureForm(forms.ModelForm):
+# --------------------
+# TODO: Add Form for add picture
+
+class AddPictureForm(forms.ModelForm):
     class Meta:
         model = PictureBlog
-        fields = '__all__'
-        widgets = {
-        }
+        fields = ('photo', 'is_published')
+
+    def __init__(self, *args, **kwargs):
+        self.user = None
+        super(AddPictureForm, self).__init__(*args, **kwargs)
+
+
+    def save(self, commit=True):
+        obj = super(AddPictureForm, self).save(commit=False)
+        obj.author = self.user
+        if commit:
+            obj.save()
+        return obj
+

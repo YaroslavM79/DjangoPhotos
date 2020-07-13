@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+{%block title%}
+  {{ title }} :: {{ block.super}}
+{%endblock%}
+
+
+{% block content %}
+    {% for item in picture_blog %}
+      <div class="card-header">
+        !Author:{{self.is_published}}
+      </div>
+
+      <div class="card-body">
+        <div class="media">
+          <img src="{{ item.photo.url }}" alt="" width="350">
+        </div>
+      </div>
+    {% endfor %}
+
+{%endblock%}
+
+

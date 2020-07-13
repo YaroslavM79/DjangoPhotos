@@ -6,7 +6,8 @@ from django.views.generic import ListView, DetailView, CreateView
 # from django.core.paginator import Paginator
 from django.contrib.auth import login, logout
 from django.contrib import messages
-from .forms import UserLoginForm, UserRegisterForm, PictureForm
+from .forms import UserLoginForm, UserRegisterForm, AddPictureForm
+from django.http import HttpResponse
 from .models import PictureBlog
 
 # Create your views here.
@@ -47,14 +48,24 @@ class HomePicturesView(ListView):
     template_name = 'picture_blog/home_pictures_list.html'
     context_object_name = 'Pictures'
     paginate_by = 10
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Main Page'
         return context
 
 
-class CreatePicture(CreateView):
+class AddPicture(CreateView):
+    model = PictureBlog
     login_url = '/admin/'
-    form_class = PictureForm
+    form_class = AddPictureForm
     template_name = 'picture_blog/add_picture.html'
+    def form_valid(self, form):
+        form.user = self.request.user
+        return super().form_valid(form)
+
+
+class ViewPicture(DetailView):
+    model = PictureBlog
+    # pk_url_kwarg = 'news_id'
+    template_name = 'picture_blog/view_user_pictures.html'
+    context_object_name = 'picture_blog_item'

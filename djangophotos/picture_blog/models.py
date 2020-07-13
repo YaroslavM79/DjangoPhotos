@@ -1,15 +1,19 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 class PictureBlog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Publish date')
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Photo', blank=False)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Photo', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Published')
+    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='User')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User')
 
     def get_absolute_url(self):
-        return reverse('view_pictures', kwargs={'pk': self.pk})
+        return reverse('view_picture', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f'created_at = {self.created_at}'

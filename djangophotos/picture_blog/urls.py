@@ -10,7 +10,8 @@ urlpatterns = [
     # path('contact/', feedback_form, name='contact'),
     #
     path('', HomePicturesView.as_view(), name='home'),
-    # path('picture/<int:pk>/', ViewPicture.as_view(), name='view_picture'),
-    path('picture/add-picture/', CreatePicture.as_view(), name='add_picture'),
+    path('picture/<int:pk>/', ViewPicture.as_view(), name='view_picture'),
+    path('picture/add-picture/', AddPicture.as_view(), name='add_picture'),
+
 
 ]
