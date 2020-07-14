@@ -6,9 +6,10 @@
 
 
 {% block content %}
-    {% for item in Pictures %}
+    {% for item in pictures %}
       <div class="card-header">
-        Author: {{ item.author }} added {{ item.created_at }}
+        {{ forloop.counter }}
+        Author: {{ item.author }}
       </div>
 
       <div class="card-body">
@@ -18,7 +19,12 @@
             {% else%}
                 <img src="https://picsum.photos/id/237/200/300" alt="" width="350" class="mr-3">
             {% endif %}
+
         </div>
+      <div class="card-footer text-muted">
+        {{ item.created_at|date:"Y-m-d H:i:s" }}
+        {{ item.created_at|timesince }}
+      </div>
       </div>
     {% endfor %}
 
