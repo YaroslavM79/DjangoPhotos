@@ -1,13 +1,13 @@
 # from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
-# from django.urls import reverse_lazy
+from django.urls import reverse_lazy
 # from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.core.paginator import Paginator
 from django.contrib.auth import login, logout
 from django.contrib import messages
+
 from .forms import UserLoginForm, UserRegisterForm, AddPictureForm
-from django.http import HttpResponse
 from .models import PictureBlog
 
 # Create your views here.
@@ -47,18 +47,22 @@ class HomePicturesView(ListView):
     model = PictureBlog  # по сути сделали news = News.objects.all()
     template_name = 'picture_blog/home_pictures_list.html'
     context_object_name = 'Pictures'
+    queryset = PictureBlog.objects.all()
     paginate_by = 10
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Main Page'
         return context
 
+    def get_queryset(self):
+        return PictureBlog.objects.filter(is_published=True)
+
 
 class AddPicture(CreateView):
     model = PictureBlog
-    login_url = '/admin/'
     form_class = AddPictureForm
     template_name = 'picture_blog/add_picture.html'
+    success_url = reverse_lazy('home')
     def form_valid(self, form):
         form.user = self.request.user
         return super().form_valid(form)
@@ -66,6 +70,4 @@ class AddPicture(CreateView):
 
 class ViewPicture(DetailView):
     model = PictureBlog
-    # pk_url_kwarg = 'news_id'
     template_name = 'picture_blog/view_user_pictures.html'
-    context_object_name = 'picture_blog_item'

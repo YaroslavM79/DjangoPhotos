@@ -9,7 +9,6 @@ class PictureBlog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Publish date')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Photo', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Published')
-    # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='User')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='User')
 
     def get_absolute_url(self):
@@ -22,3 +21,10 @@ class PictureBlog(models.Model):
         verbose_name = 'Picture Blog'
         verbose_name_plural = 'Pictures blog'
         ordering = ['-created_at']
+
+
+    # def delete(self, *args, **kwargs):
+    #     # Delete image file also
+    #     storage, path = self.image.storage, self.image.path
+    #     super(ImageModel, self).delete(*args, **kwargs)
+    #     storage.delete(path)
