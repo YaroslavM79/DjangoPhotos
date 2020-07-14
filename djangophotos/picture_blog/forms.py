@@ -45,3 +45,9 @@ class AddPictureForm(forms.ModelForm):
             obj.save()
         return obj
 
+    def clean_photo(self):
+        photo_cleaned = self.cleaned_data['photo']
+        if not photo_cleaned:
+            raise ValidationError('Picture required')
+        return photo_cleaned
+
