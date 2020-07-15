@@ -51,3 +51,8 @@ class AddPictureForm(forms.ModelForm):
             raise ValidationError('Picture required')
         return photo_cleaned
 
+class EditPictureForm(forms.ModelForm):
+    class Meta:
+        model = PictureBlog
+        fields = ('photo', 'is_published')
+

@@ -15,7 +15,7 @@ class PictureBlog(models.Model):
         return reverse('view_picture', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f'created_at = {self.created_at}'
+        return f'Photo'
 
     class Meta:
         verbose_name = 'Picture Blog'
