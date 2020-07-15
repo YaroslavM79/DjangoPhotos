@@ -71,3 +71,18 @@ class AddPicture(CreateView):
 class ViewPicture(DetailView):
     model = PictureBlog
     template_name = 'picture_blog/view_user_pictures.html'
+
+
+class MyPicturesView(ListView):
+    model = PictureBlog
+    template_name = 'picture_blog/my_pictures_list.html'
+    context_object_name = 'pictures'
+    paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Main Page'
+        return context
+
+    def get_queryset(self):
+        return PictureBlog.objects.filter(author=self.request.user)
