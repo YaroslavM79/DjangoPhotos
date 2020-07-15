@@ -22,9 +22,8 @@ class PictureBlog(models.Model):
         verbose_name_plural = 'Pictures blog'
         ordering = ['-created_at']
 
-
-    # def delete(self, *args, **kwargs):
-    #     # Delete image file also
-    #     storage, path = self.image.storage, self.image.path
-    #     super(ImageModel, self).delete(*args, **kwargs)
-    #     storage.delete(path)
+    def delete(self, *args, **kwargs):
+        # Delete image file also
+        storage, path = self.photo.storage, self.photo.path
+        super(PictureBlog, self).delete(*args, **kwargs)
+        storage.delete(path)
