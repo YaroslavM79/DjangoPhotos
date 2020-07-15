@@ -12,7 +12,7 @@ urlpatterns = [
     # path('contact/', feedback_form, name='contact'),
     #
     path('', HomePicturesView.as_view(), name='home'),
-    path('picture/<int:pk>/', ViewPicture.as_view(), name='view_picture'),
+    path('picture/<int:pk>/', ViewPicture.as_view(), name='show_user_picture'),
     path('picture/<int:pk>/update', EditPicture.as_view(), name='edit_picture'),
     path('picture/<int:pk>/delete', DeletePicture.as_view(), name='delete_picture'),
     path('picture/add-picture/', AddPicture.as_view(), name='add_picture'),

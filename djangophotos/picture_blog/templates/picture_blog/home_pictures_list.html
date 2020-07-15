@@ -14,10 +14,13 @@
 
       <div class="card-body">
         <div class="media">
+
             {% if item.photo%}
-                <img src="{{ item.photo.url }}" alt="" width="350" class="mr-3">
+                <a href="{% url 'show_user_picture' pk=item.pk %}">
+                    <img src="{{ item.photo.url }}" alt="" width="350">
+                </a>
             {% else%}
-                <img src="https://picsum.photos/id/237/200/300" alt="" width="350" class="mr-3">
+                <img src="https://picsum.photos/id/237/200/300" alt="" width="350">
             {% endif %}
 
         </div>
