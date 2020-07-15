@@ -15,16 +15,15 @@ class PictureBlog(models.Model):
         return reverse('view_picture', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return f'created_at = {self.created_at}'
+        return f'Photo'
 
     class Meta:
         verbose_name = 'Picture Blog'
         verbose_name_plural = 'Pictures blog'
         ordering = ['-created_at']
 
-
-    # def delete(self, *args, **kwargs):
-    #     # Delete image file also
-    #     storage, path = self.image.storage, self.image.path
-    #     super(ImageModel, self).delete(*args, **kwargs)
-    #     storage.delete(path)
+    def delete(self, *args, **kwargs):
+        # Delete image file also
+        storage, path = self.photo.storage, self.photo.path
+        super(PictureBlog, self).delete(*args, **kwargs)
+        storage.delete(path)
